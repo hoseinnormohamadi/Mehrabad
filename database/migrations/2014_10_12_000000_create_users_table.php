@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('FirstName');
             $table->string('LastName');
             $table->string('PhoneNumber')->nullable();
-            $table->string('CodeMeli');
+            $table->string('CodeMeli')->unique();
             $table->string('Image')->nullable();
             $table->enum('AccountStatus' , ['Active' , 'DeActive'])->default('DeActive');
             $table->enum('Rule' , ['Admin' , 'User'])->default('User');
