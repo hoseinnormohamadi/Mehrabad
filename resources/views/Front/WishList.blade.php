@@ -1,64 +1,42 @@
-@extends('layouts.Shoping')
+@extends('layouts.Front')
 @section('content')
     <main class="cart-page default">
         <div class="container">
             <div class="row">
                 <div class="cart-page-content col-xl-9 col-lg-8 col-md-12 order-1">
                     <div class="cart-page-title">
-                        <h1>تایید سفارش</h1>
+                        <h1>سبد خرید</h1>
                     </div>
-                    <section class="page-content default">
-                        <div class="address-section">
-                            <div class="checkout-contact">
-                                <div class="checkout-contact-content">
-                                    <ul class="checkout-contact-items">
-                                        <li class="checkout-contact-item">
-                                            گیرنده:
-                                            <span class="full-name">{{\Illuminate\Support\Facades\Auth::user()->FirstName . ' ' . \Illuminate\Support\Facades\Auth::user()->LastName}}</span>
-                                        </li>
-                                        <li class="checkout-contact-item">
-                                            <div class="checkout-contact-item checkout-contact-item-mobile">
-                                                شماره تماس:
-                                                <span class="mobile-phone">{{\Illuminate\Support\Facades\Auth::user()->PhoneNumber}}</span>
-                                            </div>
-                                            <div class="checkout-contact-item-message">
-                                                کد ملی:
-                                                <span class="post-code">{{\Illuminate\Support\Facades\Auth::user()->CodeMeli}}</span>
-                                            </div>
-                                            <br>
-                                        </li>
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                        <form method="post" id="shipping-data-form">
-                            <div class="checkout-pack">
-                                <section class="products-compact">
-                                    <div class="box">
-                                        <div class="row">
-                                            @if(\App\WishList::Wishes() != null)
-                                                @foreach(\App\WishList::Wishes() as $product)
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                                                <div class="product-box-container">
-                                                    <div class="product-box product-box-compact">
-                                                        <a class="product-box-img">
-                                                            <img src="{{json_decode($product->Images)[0]}}">
-                                                        </a>
-                                                        <div class="product-box-title"> {{$product->Name}}</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                            @else
-                                                {!! "هنوز چیزی به سبد خرید خود اضافه نکرده اید.<br><a href='/'>خرید خود را ادامه دهید</a>" !!}
-                                            @endif
-                                        </div>
-                                    </div>
-                                </section>
-                            </div>
-                        </form>
-                    </section>
+                    <div class="table-responsive checkout-content default">
+                        <table class="table">
+                            <tbody>
+                            @if(\App\WishList::Wishes() != null)
+                                @foreach(\App\WishList::Wishes() as $product)
+                            <tr class="checkout-item">
+                                <td>
+                                    <img src="{{json_decode($product->Images)[0]}}" width="150" height="150" alt="">
+                                    <a href="{{route('Buy.Remove' , $product->id)}}"><button class="checkout-btn-remove"></button></a>
+                                </td>
+                                <td>
+                                    <h3 class="checkout-title">
+                                        {{$product->Name}}
+                                    </h3>
+                                </td>
+                                <td>{{number_format($product->Price, 0, ',', ',')}} تومان   </td>
+                            </tr>
+                            @endforeach
+                            @else
+                                <tr class="checkout-item">
+                                    <td>
+                                        <h3 class="checkout-title">
+                                            {!! "هنوز چیزی به سبد خرید خود اضافه نکرده اید.<br><a href='/'>خرید خود را ادامه دهید</a>" !!}
+                                        </h3>
+                                    </td>
+                                </tr>
+                            @endif
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <aside class="cart-page-aside col-xl-3 col-lg-4 col-md-6 center-section order-2">
                     <div class="checkout-aside">
@@ -75,10 +53,10 @@
                                     <div class="checkout-summary-price-value">
                                         <span class="checkout-summary-price-value-amount">{{number_format(\App\WishList::Price(), 0, ',', ',')}}</span>تومان
                                     </div>
-                                    <a href="{{route('Buy.Complete')}}" class="selenium-next-step-shipping">
+                                    <a href="{{route('Buy.Buy')}}" class="selenium-next-step-shipping">
                                         <div class="parent-btn">
                                             <button class="dk-btn dk-btn-info">
-                                                خرید
+                                                ادامه ثبت سفارش
                                                 <i class="now-ui-icons shopping_basket"></i>
                                             </button>
                                         </div>
@@ -124,7 +102,6 @@
                         </div>
                     </div>
                 </aside>
-
             </div>
         </div>
     </main>

@@ -43,7 +43,7 @@
                                         </li>--}}
                                         <li>
                                             <span>دسته‌بندی</span> :
-                                            <a  class="btn-link-border">
+                                            <a href="{{route('Category' ,$Product->Categorys->id)}}" class="btn-link-border">
                                                 {{$Product->Categorys->Name}}
                                             </a>
                                         </li>

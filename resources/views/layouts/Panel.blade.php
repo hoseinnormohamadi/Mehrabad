@@ -141,7 +141,6 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('Order.All')}}"><i class="fa fa-circle-o"></i>مدیریت</a>
-                        <li><a href="{{route('Order.Add')}}"><i class="fa fa-circle-o"></i>افزودن</a>
                         </li>
                     </ul>
                 </li>
@@ -161,7 +160,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="treeview @if(request()->segment(2) == 'Category' ) active @endif">
+                <li class="treeview @if(request()->segment(2) == 'Category' || request()->segment(2) == 'SubCategory') active @endif">
                     <a href="#">
                         <i class="fa fa-list-alt"></i>
                         <span>دسته بندی ها</span>
@@ -172,6 +171,21 @@
                     <ul class="treeview-menu">
                         <li><a href="{{route('Category.All')}}"><i class="fa fa-circle-o"></i> مدیریت</a></li>
                         <li><a href="{{route('Category.Add')}}"><i class="fa fa-circle-o"></i> افزودن</a></li>
+                        <li><a href="{{route('SubCategory.All')}}"><i class="fa fa-circle-o"></i>مدیریت زیر دسته بندی ها</a></li>
+                        <li><a href="{{route('SubCategory.Add')}}"><i class="fa fa-circle-o"></i> افزودن زیر دسته بندی</a></li>
+                    </ul>
+                </li>
+                <li class="treeview @if(request()->segment(2) == 'Brands' ) active @endif">
+                    <a href="#">
+                        <i class="fa fa-codepen"></i>
+                        <span>برند ها</span>
+                        <span class="pull-left-container">
+                <i class="fa fa-angle-right pull-left"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('Brand.All')}}"><i class="fa fa-circle-o"></i> مدیریت</a></li>
+                        <li><a href="{{route('Brand.Add')}}"><i class="fa fa-circle-o"></i> افزودن</a></li>
                     </ul>
                 </li>
                 <li class="treeview @if(request()->segment(2) == 'Slider' ) active @endif">
@@ -200,19 +214,7 @@
                         <li><a href="{{route('Ad.Add')}}"><i class="fa fa-circle-o"></i> افزودن</a></li>
                     </ul>
                 </li>
-                <li class="treeview @if(request()->segment(2) == 'Brands' ) active @endif">
-                    <a href="#">
-                        <i class="fa fa-codepen"></i>
-                        <span>برند ها</span>
-                        <span class="pull-left-container">
-                <i class="fa fa-angle-right pull-left"></i>
-              </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{route('Brand.All')}}"><i class="fa fa-circle-o"></i> مدیریت</a></li>
-                        <li><a href="{{route('Brand.Add')}}"><i class="fa fa-circle-o"></i> افزودن</a></li>
-                    </ul>
-                </li>
+
 
                 <li class="treeview @if(request()->segment(2) == 'Users' ) active @endif">
                     <a href="#">

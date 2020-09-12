@@ -125,7 +125,7 @@
                     <section id="amazing-slider" class="carousel slide carousel-fade card" data-ride="carousel">
                         <div class="row m-0">
                             <ol class="carousel-indicators pr-0 d-flex flex-column col-lg-3">
-                                @foreach(\App\Shop::limit(7)->get() as $shop)
+                                @foreach(\App\Shop::where('Amazing' , 'Yes')->limit(8)->get() as $shop)
                                     <li @if($shop->id == 1)class="active" @endif data-target="#amazing-slider"
                                         data-slide-to="{{$shop->id}}">
                                         <span>{{$shop->Name}}</span>
@@ -134,7 +134,7 @@
 
 
                                 <li class="view-all">
-                                    <a  class="btn btn-primary btn-block hvr-sweep-to-left">
+                                    <a href="{{route('Amazing')}}" class="btn btn-primary btn-block hvr-sweep-to-left">
                                         <i class="fa fa-arrow-left"></i>مشاهده همه شگفت انگیزها
                                     </a>
                                 </li>
@@ -142,7 +142,7 @@
                             <div class="carousel-inner p-0 col-12 col-lg-9">
                                 <img class="amazing-title" src="assets/img/amazing-slider/amazing-title-01.png"
                                      alt="">
-                                @foreach(\App\Shop::limit(7)->get() as $shop)
+                                @foreach(\App\Shop::where('Amazing' , 'Yes')->limit(8)->get() as $shop)
                                     <div class="carousel-item @if($shop->id == 1) active @endif">
                                         <div class="row m-0">
                                             <div class="right-col col-5 d-flex align-items-center">
@@ -338,7 +338,7 @@
                                         <h3 class="card-title">
                                             <span>{{$category->Name}}</span>
                                         </h3>
-                                        <a href="#" class="view-all">مشاهده همه</a>
+                                        <a href="{{route('Category' , $category->id)}}" class="view-all">مشاهده همه</a>
                                     </header>
                                     <div class="product-carousel owl-carousel owl-theme">
                                         @foreach(\App\Shop::where('Category',$category->id)->limit(6)->get() as $item)
@@ -375,7 +375,7 @@
                             @foreach(\App\Brands::all() as $brands)
                             <div class="item">
                                 <a>
-                                    <img src="{{$brands->Image}}" alt="">
+                                    <img src="{{$brands->Image}}" alt="Brand" >
                                 </a>
                             </div>
                             @endforeach

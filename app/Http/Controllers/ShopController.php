@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Brands;
 use App\Shop;
 use App\ShopCategory;
+use App\SubCategory;
 use App\Traits\CustomAuth;
 use App\Traits\Uploader;
+use App\WishList;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -41,7 +44,13 @@ class ShopController extends Controller
     public function Add()
     {
         $Tags = ShopCategory::all();
-        return view('Admin.Shop.Add')->with('Tags' , $Tags);
+        $Brands = Brands::all();
+        $SubTag = SubCategory::all();
+        return view('Admin.Shop.Add')->with([
+            'Tags' => $Tags,
+            'Brands' => $Brands,
+            'SubTag' => $SubTag
+        ]);
     }
 
     public function Create(Request $request)
@@ -53,6 +62,9 @@ class ShopController extends Controller
             'Count' => 'required|integer',
             'Status' => 'required|string',
             'Category' => 'required|string',
+            'Brand' => 'required|string',
+            'Amazing' => 'string',
+            'SubCategory' => 'string',
         ]);
         try {
             foreach($request->file('Images') as $image)
@@ -64,7 +76,7 @@ class ShopController extends Controller
                 }
                 $new_name = bin2hex(random_bytes(32)) . '.jpg';
                 $image->move($orginalPath, $new_name);
-                $Images[] = $orginalPath . $new_name;
+                $Images[] = '/' . $orginalPath . $new_name;
             }
 
             $Item = Shop::create([
@@ -75,6 +87,10 @@ class ShopController extends Controller
                 'Count' => $request->Count,
                 'Status' => $request->Status == 'Available' ? 'Available' : 'UnAvailable',
                 'Category' => $request->Category,
+                'SubCategory' => $request->SubCategory,
+                'Brand' => $request->Brand,
+                'Amazing' => $request->Amazing == 'on' ? 'Yes' : 'No',
+
             ]);
             return RedirectController::Redirect(route('Shop.All'),'کالا با موفقیت اضافه شد.');
         } catch (\Exception $exception) {
@@ -88,10 +104,15 @@ class ShopController extends Controller
         if ($Item == '' || empty($Item) || $Item->count() == 0){
             return RedirectController::Redirect(route('Shop.All'),'کالا مورد نظر شما یافت نشد');
         }
+
         $Tags = ShopCategory::all();
+        $Brands = Brands::all();
+        $SubTag = SubCategory::all();
         return view('Admin.Shop.Edit')->with([
             'Item' => $Item,
-            'Tags' => $Tags
+            'Tags' => $Tags,
+            'Brands' => $Brands,
+            'SubTag' => $SubTag
         ]);
     }
 
@@ -108,6 +129,9 @@ class ShopController extends Controller
             'Count' => 'required|integer',
             'Status' => 'required|string',
             'Category' => 'required|string',
+            'Brand' => 'required|string',
+            'Amazing' => 'string',
+            'SubCategory' => 'string'
         ]);
         try {
             if ($request->hasFile('Images') && $request->Images != null){
@@ -132,6 +156,9 @@ class ShopController extends Controller
             $Item->Status = $request->Status;
             $Item->Count = $request->Count;
             $Item->Category = $request->Category;
+            $Item->SubCategory = $request->SubCategory;
+            $Item->Brand = $request->Brand;
+            $Item->Amazing = $request->Amazing == 'on' ? 'Yes' : 'No';
             $Item->save();
             return RedirectController::Redirect(route('Shop.All'),'کالا با موفقیت بروزرسانی شد');
 
@@ -149,6 +176,10 @@ class ShopController extends Controller
             return RedirectController::Redirect(route('Shop.All'),'کالا مورد نظر شما یافت نشد');
         }
         try {
+            $Wish = WishList::where('ProductID',$Item->id)->get();
+            foreach ($Wish as $wish) {
+                $wish->delete();
+            }
             $Item->delete();
             return RedirectController::Redirect(route('Shop.All'),'کالا با موفقیت حذف شد');
         }

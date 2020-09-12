@@ -22,6 +22,10 @@ class WishList extends Model
     }
 
     public static function Wishes(){
-        $Wish = WishList::where('UserID' , Auth::id())->get();
+        $Product = [] ;
+        foreach (WishList::where('UserID' , Auth::id())->get() as $item) {
+            $Product[] = Shop::find($item->ProductID);
+        }
+        return $Product;
     }
 }

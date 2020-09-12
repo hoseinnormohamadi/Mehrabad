@@ -106,6 +106,35 @@
 
 
 
+                    <div class="form-group">
+                        <label for="Count">زیر دسته بندی محصول</label>
+                        <select class="form-control" name="SubCategory">
+                            <option selected disabled>زیر دسته بندی محصول را انتحاب کنید</option>
+                            @foreach($SubTag as $Tag)
+                                <option value="{{$Tag->id}}" @if($Item->SubCategory == $Tag->id) selected @endif>{{$Tag->Name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Count">برند محصول</label>
+                        <select class="form-control" name="Brand">
+                            <option selected disabled>برند محصول را انتحاب کنید</option>
+                            @foreach($Brands as $Brand)
+                                <option value="{{$Brand->id}}" @if($Brand->id == $Item->Brand) selected @endif>{{$Brand->Name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label for="Amazing"> محصول ویژه </label>
+                            <input type="checkbox" @if($Item->Amazing == 'Yes') checked @endif name="Amazing" id="Amazing" >
+                        </div>
+                    </div>
+
 
 {{--
                     <div class="form-group">

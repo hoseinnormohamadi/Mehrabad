@@ -21,6 +21,23 @@ class CreateShopsTable extends Migration
         });
 
 
+        Schema::create('sub_categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('Name');
+            $table->unsignedBigInteger('Parent');
+            $table->foreign('Parent')->references('id')->on('shop_categories')->onDelete('cascade');
+            $table->timestamps();
+        });
+
+
+        Schema::create('brands', function (Blueprint $table) {
+            $table->id();
+            $table->string('Name');
+            $table->text('Image');
+            $table->timestamps();
+        });
+
+
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
             $table->string('Name');
@@ -29,8 +46,13 @@ class CreateShopsTable extends Migration
             $table->integer('Price')->nullable();
             $table->integer('Count')->nullable();
             $table->enum('Status' , ['Available','UnAvailable']);
+            $table->enum('Amazing' , ['Yes','No'])->default('No');
             $table->unsignedBigInteger('Category');
             $table->foreign('Category')->on('shop_categories')->references('id')->onDelete('cascade');
+            $table->unsignedBigInteger('SubCategory')->nullable();
+            $table->foreign('SubCategory')->on('sub_categories')->references('id')->onDelete('cascade');
+            $table->unsignedBigInteger('Brand');
+            $table->foreign('Brand')->on('brands')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -44,5 +66,9 @@ class CreateShopsTable extends Migration
     {
         Schema::dropIfExists('shops');
         Schema::dropIfExists('shop_categories');
+        Schema::dropIfExists('brands');
+        Schema::dropIfExists('sub_categories');
+
+
     }
 }

@@ -5251,7 +5251,7 @@ main.profile-user-page .table-order td.order-code {
 
 .shopping-page header.header-shopping .checkout-steps li {
     float: right;
-    width: 33.3%;
+    width: 50%;
     position: relative;
 }
 

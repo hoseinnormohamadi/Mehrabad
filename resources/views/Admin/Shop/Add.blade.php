@@ -102,19 +102,55 @@
                             @endforeach
                         </select>
                     </div>
-{{--
+
+
+
+
+                    <div class="form-group">
+                        <label for="Count">زیر دسته بندی محصول</label>
+                        <select class="form-control" name="SubCategory">
+                            <option selected disabled>زیر دسته بندی محصول را انتحاب کنید</option>
+                            @foreach($SubTag as $Tag)
+                            <option value="{{$Tag->id}}">{{$Tag->Name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
+
 
 
                     <div class="form-group">
                         <label for="Count">برند محصول</label>
                         <select class="form-control" name="Brand">
                             <option selected disabled>برند محصول را انتحاب کنید</option>
-                            @foreach($Brands as $brand)
-                            <option value="{{$brand->id}}">{{$brand->Name}}</option>
+                            @foreach($Brands as $Brand)
+                            <option value="{{$Brand->id}}">{{$Brand->Name}}</option>
                             @endforeach
                         </select>
                     </div>
---}}
+
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label for="Amazing"> محصول ویژه </label>
+                            <input type="checkbox" name="Amazing" id="Amazing" >
+                        </div>
+                    </div>
+
+                    {{--
+
+
+                                        <div class="form-group">
+                                            <label for="Count">برند محصول</label>
+                                            <select class="form-control" name="Brand">
+                                                <option selected disabled>برند محصول را انتحاب کنید</option>
+                                                @foreach($Brands as $brand)
+                                                <option value="{{$brand->id}}">{{$brand->Name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                    --}}
 
 
 

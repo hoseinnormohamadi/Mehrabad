@@ -4,10 +4,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'WebController@index')->name('Index');
 Route::get('Product/{ID}', 'WebController@Product')->name('Product');
+Route::get('Amazing', 'WebController@Amazing')->name('Amazing');
+Route::get('Search', 'WebController@Search')->name('Search');
+Route::get('Category/{ID}', 'WebController@Category')->name('Category');
+Route::get('Category/{ID}/{SID}', 'WebController@SubCategory')->name('SubCat');
 Route::group(['middleware' => 'auth'] , function (){
     Route::group(['prefix' => 'Buy', 'as' => 'Buy.'], function () {
+        Route::get('Buy', 'BuyController@Buy')->name('Buy');
+        Route::get('Complete', 'BuyController@Complete')->name('Complete');
+        Route::get('Completed/{ID}', 'BuyController@Completed')->name('Completed');
         Route::get('WishList', 'BuyController@WishListShow')->name('WishListShow');
         Route::get('WishList/{ProductID}', 'BuyController@WishList')->name('WishList');
+        Route::get('Remove/{ProductID}', 'BuyController@Remove')->name('Remove');
     });
 });
 
@@ -36,6 +44,16 @@ Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
             Route::get('Edit/{ID}', 'ShopCategoryController@Edit')->name('Edit');
             Route::put('Update/{ID}', 'ShopCategoryController@Update')->name('Update');
             Route::get('Delete/{ID}', 'ShopCategoryController@Delete')->name('Delete');
+        });
+
+        Route::group(['prefix' => 'SubCategory', 'as' => 'SubCategory.'], function () {
+            Route::get('/', 'SubCategoryController@All')->name('Category');
+            Route::get('All', 'SubCategoryController@All')->name('All');
+            Route::get('Add', 'SubCategoryController@Add')->name('Add');
+            Route::post('Create', 'SubCategoryController@Create')->name('Create');
+            Route::get('Edit/{ID}', 'SubCategoryController@Edit')->name('Edit');
+            Route::put('Update/{ID}', 'SubCategoryController@Update')->name('Update');
+            Route::get('Delete/{ID}', 'SubCategoryController@Delete')->name('Delete');
         });
 
 
@@ -78,13 +96,10 @@ Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
 
 
         Route::group(['prefix' => 'Order', 'as' => 'Order.'], function () {
-            Route::get('/', 'BrandsController@All')->name('Order');
-            Route::get('All', 'BrandsController@All')->name('All');
-            Route::get('Add', 'BrandsController@Add')->name('Add');
-            Route::post('Create', 'BrandsController@Create')->name('Create');
-            Route::get('Edit/{ID}', 'BrandsController@Edit')->name('Edit');
-            Route::put('Update/{ID}', 'BrandsController@Update')->name('Update');
-            Route::get('Delete/{ID}', 'BrandsController@Delete')->name('Delete');
+            Route::get('/', 'OrderController@All')->name('Order');
+            Route::get('All', 'OrderController@All')->name('All');
+            Route::get('Exel/{ID}', 'OrderController@Exel')->name('Exel');
+            Route::get('Pdf/{ID}', 'OrderController@Pdf')->name('Pdf');
         });
 
 
