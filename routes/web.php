@@ -9,6 +9,15 @@ Route::get('Search', 'WebController@Search')->name('Search');
 Route::get('Category/{ID}', 'WebController@Category')->name('Category');
 Route::get('Category/{ID}/{SID}', 'WebController@SubCategory')->name('SubCat');
 Route::group(['middleware' => 'auth'] , function (){
+    Route::group(['prefix' => 'Panel' , 'as' => 'Panel.'] , function (){
+        Route::get('index','PanellController@Index')->name('Index');
+        Route::get('ChangePassword','PanellController@ChangePassword')->name('ChangePassword');
+        Route::get('Orders','PanellController@Orders')->name('Orders');
+        Route::get('Edit','PanellController@Edit')->name('Edit');
+        Route::put('Update','PanellController@Update')->name('Update');
+    });
+
+
     Route::group(['prefix' => 'Buy', 'as' => 'Buy.'], function () {
         Route::get('Buy', 'BuyController@Buy')->name('Buy');
         Route::get('Complete', 'BuyController@Complete')->name('Complete');
@@ -98,8 +107,12 @@ Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
         Route::group(['prefix' => 'Order', 'as' => 'Order.'], function () {
             Route::get('/', 'OrderController@All')->name('Order');
             Route::get('All', 'OrderController@All')->name('All');
+            Route::get('Filter', 'OrderController@Filter')->name('Filter');
+            Route::get('FilterPost', 'OrderController@FilterPost')->name('FilterPost');
             Route::get('Exel/{ID}', 'OrderController@Exel')->name('Exel');
             Route::get('Pdf/{ID}', 'OrderController@Pdf')->name('Pdf');
+            Route::get('Mali/{ID}', 'OrderController@Mali')->name('Mali');
+            Route::post('Report', 'OrderController@Report')->name('Report');
         });
 
 

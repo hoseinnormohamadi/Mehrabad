@@ -59,6 +59,7 @@ class ShopController extends Controller
             'Name' => 'required|string',
             'Description' => 'required|string',
             'Price' => 'required|integer',
+            'Takhfif' => 'integer',
             'Count' => 'required|integer',
             'Status' => 'required|string',
             'Category' => 'required|string',
@@ -84,6 +85,7 @@ class ShopController extends Controller
                 'Description' => $request->Description,
                 'Images' => json_encode($Images),
                 'Price' => $request->Price,
+                'Takhfif' => $request->Takhfif != null ? $request->Takhfif : null,
                 'Count' => $request->Count,
                 'Status' => $request->Status == 'Available' ? 'Available' : 'UnAvailable',
                 'Category' => $request->Category,
@@ -126,6 +128,7 @@ class ShopController extends Controller
             'Name' => 'required|string',
             'Description' => 'required|string',
             'Price' => 'required|integer',
+            'Takhfif' => 'integer',
             'Count' => 'required|integer',
             'Status' => 'required|string',
             'Category' => 'required|string',
@@ -153,6 +156,7 @@ class ShopController extends Controller
             $Item->Description = $request->Description;
             $Item->Images = $request->hasFile('Images') ? json_encode($Images) : $Item->Images;
             $Item->Price = $request->Price;
+            $Item->Takhfif = $request->Takhfif != null ? $request->Takhfif : $Item->Takhfif;
             $Item->Status = $request->Status;
             $Item->Count = $request->Count;
             $Item->Category = $request->Category;

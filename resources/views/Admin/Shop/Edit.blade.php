@@ -68,6 +68,17 @@
 
 
 
+                    <div class="form-group">
+                        <label for="Takhfif">قیمت محصول بعد از تخفیف</label>
+                        <div class="input-group">
+                            <input type="number" name="Takhfif" id="Takhfif" class="form-control"  value="{{$Item->Takhfif}}">
+                            <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                        </div>
+                    </div>
+
+
+
+
 
 
                     <div class="form-group">

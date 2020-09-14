@@ -123,12 +123,11 @@
                             @endguest
                             @auth()
                                 <div class="dropdown-item">
-                                    <a href="#" class="dropdown-item-link">
+                                    <a href="{{route('Panel.Index')}}" class="dropdown-item-link">
                                         <i class="fa fa-user"></i>
                                         پروفایل
                                     </a>
                                 </div>
-
 
 
                                 <div class="dropdown-item">

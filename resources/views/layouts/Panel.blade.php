@@ -142,6 +142,8 @@
                     <ul class="treeview-menu">
                         <li><a href="{{route('Order.All')}}"><i class="fa fa-circle-o"></i>مدیریت</a>
                         </li>
+                        <li><a href="{{route('Order.Filter')}}"><i class="fa fa-circle-o"></i>فیلتر</a>
+                        </li>
                     </ul>
                 </li>
 

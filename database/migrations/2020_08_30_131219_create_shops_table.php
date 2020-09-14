@@ -44,6 +44,7 @@ class CreateShopsTable extends Migration
             $table->text('Description');
             $table->text('Images');
             $table->integer('Price')->nullable();
+            $table->integer('Takhfif')->nullable();
             $table->integer('Count')->nullable();
             $table->enum('Status' , ['Available','UnAvailable']);
             $table->enum('Amazing' , ['Yes','No'])->default('No');
@@ -55,6 +56,8 @@ class CreateShopsTable extends Migration
             $table->foreign('Brand')->on('brands')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
+
+
     }
 
     /**

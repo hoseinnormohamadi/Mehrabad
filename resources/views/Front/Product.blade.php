@@ -70,18 +70,37 @@
                                     <i class="fa fa-check-circle"></i>
                                     <p class="product-guarantee-text">گارانتی اصالت و سلامت فیزیکی کالا</p>
                                 </div>
+
+
                                 <div class="price-product defualt">
                                     <div class="price-value">
-                                        <span> {{  number_format($Product->Price, 0, ',', ',')}} </span>
+                                        @if($Product->Takhfif != null)
+                                            <small>قبل تخفیف</small>
+                                            <del><span> {{  number_format($Product->Price, 0, ',', ',')}} </span></del>
+                                            <span class="price-currency">تومان</span>
+                                            <br>
+                                            <span> {{  number_format($Product->Takhfif, 0, ',', ',')}} </span>
+                                        @else
+                                            <span> {{  number_format($Product->Price, 0, ',', ',')}} </span>
+
+                                        @endif
                                         <span class="price-currency">تومان</span>
                                     </div>
-                                    {{--<div class="price-discount" data-title="تخفیف">
-                                            <span>
-                                                ۰
-                                            </span>
-                                        <span>%</span>
-                                    </div>--}}
                                 </div>
+                            {{--    <div class="price">
+                                    <del><span>4,299,000<span>تومان</span></span></del>
+                                    <ins><span>4,180,000<span>تومان</span></span></ins>
+                                    <span class="discount-percent">3 % تخفیف</span>
+                                </div>--}}
+
+
+
+
+
+
+
+
+
                                 <div class="product-add default">
                                     <div class="parent-btn ">
                                         @if($Product->Count <= 0)

@@ -13,9 +13,10 @@
 
                         <div class="col-sm-6">
                             <div id="example1_filter" class="dataTables_filter">
-                                <form method="GET" action="{{route('Order.All')}}">
-                                    <label>جست و جو: <input type="text" class="form-control input-sm" placeholder="" aria-controls="example1" name="SearchTerm"></label>
-                                    <input class="btn btn-info" type="submit" value="جست و جو">
+                                <form method="post" action="{{route('Order.Report')}}">
+                                    @csrf
+                                    <input type="hidden" name="Data" value="{{json_encode(array('StartDate' => $_GET['StartDate'],'FinishDate' => $_GET['FinishDate'], 'CodeMeli' => $_GET['CodeMeli']))}}" >
+                                    <input type="submit" class="btn btn-success" value="فاکتور کلی">
                                 </form>
                             </div>
                         </div>
