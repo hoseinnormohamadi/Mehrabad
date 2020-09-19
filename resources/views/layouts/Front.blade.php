@@ -26,8 +26,9 @@
     <div class="container">
         <div class="navbar-translate">
             <a class="navbar-brand" href="{{route('Index')}}">
-                <img src="{{asset(\App\Site::Icon())}}" height="24px" alt="">
+                <img src="{{asset(\App\Site::Icon())}}" height="50px" alt="">
             </a>
+            <h3>{{\App\Site::Name()}}</h3>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navigation" aria-controls="navigation-index" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -41,8 +42,8 @@
                     <button type="submit"><img src="{{asset('assets/img/search.png')}}" alt=""></button>
                 </form>
                 <ul>
-                    <li><a href="#"><i class="now-ui-icons users_single-02"></i></a></li>
-                    <li><a href="#"><i class="now-ui-icons shopping_basket"></i></a></li>
+                    <li><a href="{{route('Panel.Index')}}"><i class="now-ui-icons users_single-02"></i></a></li>
+                    <li><a href="{{route('Buy.WishListShow')}}"><i class="now-ui-icons shopping_basket"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -50,7 +51,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <div class="logo-nav-res default text-center">
                 <a href="{{route('Index')}}">
-                    <img src="{{asset(\App\Site::Icon())}}" height="36px" alt="">
+                    <img src="{{asset(\App\Site::Icon())}}" height="70px" alt="">
                 </a>
             </div>
             <ul class="navbar-nav default">
@@ -181,7 +182,13 @@
                                                 </div>
                                                 <div class="basket-item-params">
                                                     <div class="basket-item-props">
-                                                        <span>{{number_format($product->Price, 0, ',', ',')}} تومان </span>
+                                                        @if($product->Takhfif != null)
+                                                            <del><span> {{  number_format($product->Price, 0, ',', ',')}} تومان </span></del>
+                                                            <span> {{  number_format($product->Takhfif, 0, ',', ',')}} تومان </span>
+                                                        @else
+                                                            <span> {{  number_format($product->Price, 0, ',', ',')}} تومان </span>
+
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,14 +198,14 @@
                                     @endforeach
                                     @endif
                             </ul>
-                            <a href="#" class="basket-submit">
+
                                 @guest
-                                    ورود و ثبت سفارش
+                                <a href="{{route('login')}}" class="basket-submit"> ورود و ثبت سفارش</a>
+
                                     @endguest
                                 @auth
-                                    تکمیل خرید
+                                    <a  class="basket-submit" href="{{route('Buy.WishListShow')}}"> تکمیل خرید</a>
                                     @endauth
-                            </a>
                         </ul>
                     </div>
                 </div>

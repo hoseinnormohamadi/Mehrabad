@@ -140,7 +140,7 @@
                                 </li>
                             </ol>
                             <div class="carousel-inner p-0 col-12 col-lg-9">
-                                <img class="amazing-title" src="assets/img/amazing-slider/amazing-title-01.png"
+                                <img class="amazing-title" src="{{asset('assets/img/amazing-slider/amazing-title-01.png')}}"
                                      alt="">
                                 @foreach(\App\Shop::where('Amazing' , 'Yes')->limit(8)->get() as $shop)
                                     <div class="carousel-item @if($shop->id == 1) active @endif">
@@ -153,7 +153,17 @@
                                             </div>
                                             <div class="left-col col-7">
                                                 <div class="price">
-                                                    <ins><span>{{number_format($shop->Price, 0, ',', ',')}}<span>تومان</span></span></ins>
+                                                    @if($shop->Takhfif != null)
+                                                        <small>قبل تخفیف</small>
+                                                        <del><span> {{  number_format($shop->Price, 0, ',', ',')}} تومان </span></del>
+                                                        <br>
+                                                        <small>بعد از تخفیف</small>
+                                                        <span class="price-currency"> {{  number_format($shop->Takhfif, 0, ',', ',')}} تومان </span>
+                                                    @else
+                                                        <span class="price-currency"> {{  number_format($shop->Price, 0, ',', ',')}} تومان </span>
+
+                                                    @endif
+
                                                 </div>
                                                 <h2 class="product-title">
                                                     <a href="{{route('Product' , $shop->id)}}">{{$shop->Name}}</a>
@@ -341,7 +351,7 @@
                                         <a href="{{route('Category' , $category->id)}}" class="view-all">مشاهده همه</a>
                                     </header>
                                     <div class="product-carousel owl-carousel owl-theme">
-                                        @foreach(\App\Shop::where('Category',$category->id)->limit(6)->get() as $item)
+                                        @foreach(\App\Shop::where('Category',$category->id)->inRandomOrder()->limit(6)->get() as $item)
                                             <div class="item">
                                                 <a href="{{route('Product' , $item->id)}}">
                                                     <img src="{{json_decode($item->Images)[0]}}"
@@ -352,7 +362,14 @@
                                                 </h2>
                                                 <div class="price">
                                                     <div class="text-center">
-                                                        <ins><span>{{ number_format($item->Price, 0, ',', ',')}}<span>تومان</span></span></ins>
+                                                        @if($item->Takhfif != null)
+                                                            <del><span> {{  number_format($item->Price, 0, ',', ',')}} تومان </span></del>
+                                                            <span> {{  number_format($item->Takhfif, 0, ',', ',')}} تومان </span>
+                                                        @else
+                                                            <span> {{  number_format($item->Price, 0, ',', ',')}} تومان </span>
+
+                                                        @endif
+
                                                     </div>
                                                 </div>
                                             </div>

@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <aside class="sidebar-page col-12 col-sm-12 col-md-4 col-lg-3 order-1">
-                    <div class="box">
+                   {{-- <div class="box">
                         <div class="box-header">دسته بندی نتایج</div>
                         <div class="box-content category-result">
                             <ul>
@@ -22,7 +22,7 @@
 
                             </ul>
                         </div>
-                    </div>
+                    </div>--}}
                     <div class="box">
                         <div class="box-header">جستجو در نتایج:</div>
                         <div class="box-content">
@@ -74,8 +74,20 @@
                                                         <div class="price">
                                                             <div class="price-value">
                                                                 <div class="price-value-wrapper">
-                                                                    {{  number_format($item->Price, 0, ',', ',')}} <span
-                                                                        class="price-currency">تومان</span>
+                                                                    @if($item->Takhfif != null)
+                                                                        <small>قبل تخفیف</small>
+                                                                        <del><span> {{  number_format($item->Price, 0, ',', ',')}} </span></del>
+                                                                        <span class="price-currency">تومان</span>
+                                                                        <br>
+                                                                        <small>بعد از تخفیف</small>
+
+                                                                        <span> {{  number_format($item->Takhfif, 0, ',', ',')}} </span>
+                                                                    @else
+                                                                        <span> {{  number_format($item->Price, 0, ',', ',')}} </span>
+
+                                                                    @endif
+                                                                    <span class="price-currency">تومان</span>
+
                                                                 </div>
                                                             </div>
                                                         </div>
