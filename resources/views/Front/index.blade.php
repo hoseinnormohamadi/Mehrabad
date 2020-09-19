@@ -79,13 +79,35 @@
                                 @endforeach
                             </div>
                         </div>
-                        @foreach(\App\Shop::inRandomOrder()->limit(4)->get() as $item)
-                            <div class="widget-banner widget card">
-                                <a href="#" target="_blank">
-                                    <img class="img-fluid" src="{{json_decode($item->Images)[0]}}" alt="">
+
+
+
+
+
+                        <div class="widget-suggestion widget card">
+                            <header class="card-header">
+                                <h3 class="card-title">پیشنهاد برای شما</h3>
+                            </header>
+
+                           @php
+                            $Data = \App\Shop::inRandomOrder()->limit(1)->get();
+                            @endphp
+
+                            <div class="item">
+                                <a href="{{route('Product' , $Data[0]->id)}}">
+                                    <img src="{{json_decode($Data[0]->Images)[0]}}" class="w-100" alt="">
                                 </a>
+                                <h3 class="product-title">
+                                    <a href="{{route('Product' , $Data[0]->id)}}">{{$Data[0]->Name}}</a>
+                                </h3>
+                                <div class="price">
+                                    <span class="amount">{{number_format($Data[0]->Price, 0, ',', ',')}}<span>تومان</span></span>
+                                </div>
                             </div>
-                        @endforeach
+
+
+
+                        </div>
                     </div>
                 </aside>
                 <div class="col-12 col-lg-9 order-1 order-lg-2">
