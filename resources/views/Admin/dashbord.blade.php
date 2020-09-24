@@ -321,7 +321,8 @@
                                             </a>
                                         </div>
                                         <div class="product-info">
-                                            <a  href="{{route('Product' , $item->id)}}" class="product-title">آیفون ۵ اس
+                                            <a  href="{{route('Product' , $item->id)}}" class="product-title">
+                                                {{$item->Name}}
                                                 <span class="label label-warning pull-left">
                                                     @if($item->Takhfif != null)
                                                         <span> {{  number_format($item->Takhfif, 0, ',', ',')}} تومان </span>
