@@ -60,12 +60,13 @@
                         </form>
                     </section>
                 </div>
+
                 <aside class="cart-page-aside col-xl-3 col-lg-4 col-md-6 center-section order-2">
                     <div class="checkout-aside">
                         <div class="checkout-summary">
                             <div class="checkout-summary-main">
                                 <ul class="checkout-summary-summary">
-                                    <li><span>مبلغ کل</span><span>{{number_format(\App\WishList::Price(), 0, ',', ',')}} تومان</span></li>
+                                    <li><span>مبلغ کل بدون تخفیف : </span><span>{{number_format(\App\WishList::AllPrice(), 0, ',', ',')}} تومان </span></li>
                                 </ul>
                                 <div class="checkout-summary-devider">
                                     <div></div>
@@ -75,14 +76,18 @@
                                     <div class="checkout-summary-price-value">
                                         <span class="checkout-summary-price-value-amount">{{number_format(\App\WishList::Price(), 0, ',', ',')}}</span>تومان
                                     </div>
-                                    <a href="{{route('Buy.Complete')}}" class="selenium-next-step-shipping">
+                                    <form method="get" action="{{route('Buy.Complete')}}">
                                         <div class="parent-btn">
-                                            <button class="dk-btn dk-btn-info">
+                                            <label>زمان تحویل کالا :‌</label>
+                                            <input class="form-control" type="date" name="OrderDate">
+                                        </div>
+                                        <div class="parent-btn">
+                                            <button type="submit" class="dk-btn @if(\App\WishList::where('UserID' , \Illuminate\Support\Facades\Auth::id())->count() <= 0) dk-btn-danger @else dk-btn-info @endif" @if(\App\WishList::where('UserID' , \Illuminate\Support\Facades\Auth::id())->count() <= 0) disabled @endif>
                                                 خرید
                                                 <i class="now-ui-icons shopping_basket"></i>
                                             </button>
                                         </div>
-                                    </a>
+                                    </form>
                                     <div>
                                             <span>
                                                 کالاهای موجود در سبد شما ثبت و رزرو نشده‌اند، برای ثبت سفارش مراحل بعدی
@@ -106,6 +111,8 @@
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
                         <div class="checkout-feature-aside">
                             <ul>
@@ -124,6 +131,7 @@
                         </div>
                     </div>
                 </aside>
+
 
             </div>
         </div>

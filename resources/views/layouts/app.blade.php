@@ -22,8 +22,45 @@
 <body>
 <div class="wrapper default">
     <div class="container">
+
         <div class="row">
+
             <div class="main-content col-12 col-md-7 col-lg-5 mx-auto">
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">پیام سایت</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div
+                                class="modal-body">
+
+
+                                @if($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div>{{$error}}</div>
+                                        <br>
+                                    @endforeach
+
+                                @elseif(session('errors'))
+                                    {{session('errors')->first('msg')}}
+                                @endif
+
+
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">متوجه شدم</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @yield('content')
             </div>
         </div>
@@ -60,5 +97,11 @@
 <script src="{{asset('assets/js/plugins/jquery.easing.1.3.min.js')}}" type="text/javascript"></script>
 <!-- Main Js -->
 <script src="{{asset('assets/js/main.js')}}" type="text/javascript"></script>
-
+@if(session('errors'))
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            $('#myModal').modal('show');
+        });
+    </script>
+@endif
 </html>

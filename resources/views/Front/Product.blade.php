@@ -37,10 +37,12 @@
                                 </div>
                                 <div class="product-directory default">
                                     <ul>
-                                       {{-- <li>
+                                        <li>
                                             <span>برند</span> :
-                                            <span class="product-brand-title">متفرقه</span>
-                                        </li>--}}
+                                            <a href="{{route('Brands' ,$Product->Brand )}}" class="btn-link-border">
+                                            <span class="product-brand-title">{{\App\Brands::find($Product->Brand)->Name}}</span>
+                                            </a>
+                                        </li>
                                         <li>
                                             <span>دسته‌بندی</span> :
                                             <a href="{{route('Category' ,$Product->Categorys->id)}}" class="btn-link-border">

@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <section class="banner">
                         <a href="#">
-                            <img src="assets/img/banner/banner.jpg" alt="">
+                            <img src="{{asset('assets/img/banner/banner.jpg')}}" alt="">
                         </a>
                     </section>
                 </div>
@@ -18,38 +18,38 @@
                     <div class="sidebar-inner default">
                         <div class="widget-banner widget card">
                             <a href="#" target="_top">
-                                <img class="img-fluid" src="assets/img/banner/1455.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('assets/img/banner/1455.jpg')}}" alt="">
                             </a>
                         </div>
                         <div class="widget-services widget card">
                             <div class="row">
                                 <div class="feature-item col-12">
                                     <a href="#" target="_blank">
-                                        <img src="assets/img/svg/return-policy.svg">
+                                        <img src="{{asset('assets/img/svg/return-policy.svg')}}">
                                     </a>
                                     <p>ضمانت برگشت</p>
                                 </div>
                                 <div class="feature-item col-6">
                                     <a href="#" target="_blank">
-                                        <img src="assets/img/svg/payment-terms.svg">
+                                        <img src="{{asset('assets/img/svg/payment-terms.svg')}}">
                                     </a>
                                     <p>پرداخت درمحل</p>
                                 </div>
                                 <div class="feature-item col-6">
                                     <a href="#" target="_blank">
-                                        <img src="assets/img/svg/delivery.svg">
+                                        <img src="{{asset('assets/img/svg/delivery.svg')}}">
                                     </a>
                                     <p>تحویل اکسپرس</p>
                                 </div>
                                 <div class="feature-item col-6">
                                     <a href="#" target="_blank">
-                                        <img src="assets/img/svg/origin-guarantee.svg">
+                                        <img src="{{asset('assets/img/svg/origin-guarantee.svg')}}">
                                     </a>
                                     <p>تضمین بهترین قیمت</p>
                                 </div>
                                 <div class="feature-item col-6">
                                     <a href="#" target="_blank">
-                                        <img src="assets/img/svg/contact-us.svg">
+                                        <img src="{{asset('assets/img/svg/contact-us.svg')}}">
                                     </a>
                                     <p>پشتیبانی 24 ساعته</p>
                                 </div>
@@ -66,14 +66,22 @@
                                 @foreach(\App\Shop::inRandomOrder()->limit(5)->get() as $item)
 
                                     <div class="item">
-                                        <a href="#">
+                                        <a href="{{route('Product' , $item->id)}}">
                                             <img src="{{json_decode($item->Images)[0]}}" class="w-100" alt="">
                                         </a>
                                         <h3 class="product-title">
-                                            <a href="#">{{$item->Name}}</a>
+                                            <a href="{{route('Product' , $item->id)}}">{{$item->Name}}</a>
                                         </h3>
                                         <div class="price">
-                                            <span class="amount">{{number_format($item->Price, 0, ',', ',')}}<span>تومان</span></span>
+                                            <span class="amount">
+
+                                                 @if($item->Takhfif != null)
+                                                    <del><span > {{  number_format($item->Price, 0, ',', ',')}} تومان </span></del><br>
+                                                    <span class="amount"> {{  number_format($item->Takhfif, 0, ',', ',')}} تومان </span>
+                                                @else
+                                                    <span class="amount"> {{  number_format($item->Price, 0, ',', ',')}} تومان </span>
+                                                @endif
+                                            </span>
                                         </div>
                                     </div>
                                 @endforeach
@@ -100,8 +108,16 @@
                                 <h3 class="product-title">
                                     <a href="{{route('Product' , $Data[0]->id)}}">{{$Data[0]->Name}}</a>
                                 </h3>
-                                <div class="price">
-                                    <span class="amount">{{number_format($Data[0]->Price, 0, ',', ',')}}<span>تومان</span></span>
+                                <div class="price" style="text-align: center">
+
+                                         @if($item->Takhfif != null)
+                                            <del><span > {{  number_format($item->Price, 0, ',', ',')}} تومان </span></del>
+                                            <h6 class="amount" style="color: red"> {{  number_format($item->Takhfif, 0, ',', ',')}} تومان </h6>
+                                        @else
+                                            <span class="amount" style="color: red"> {{  number_format($item->Price, 0, ',', ',')}} تومان </span>
+
+                                        @endif
+
                                 </div>
                             </div>
 
@@ -413,7 +429,7 @@
                         <div class="owl-carousel">
                             @foreach(\App\Brands::all() as $brands)
                             <div class="item">
-                                <a>
+                                <a href="{{route('Brands' , $brands->id)}}">
                                     <img src="{{$brands->Image}}" alt="Brand" >
                                 </a>
                             </div>

@@ -70,6 +70,11 @@
                         {{$Orders->User->PhoneNumber}}
                         <br>
                     @endif
+                    @if($Orders->User->Address != null)
+                        آدرس :
+                        {{$Orders->User->Address}}
+                        <br>
+                    @endif
                     @if($Orders->User->email != null)
                         ایمیل :
                         {{$Orders->User->email}}
@@ -83,6 +88,7 @@
                 <br>
                 <b>کد سفارش : </b> {{$Orders->id}}<br>
                 <b>تاریخ سفارش : </b> {{\Hekmatinasser\Verta\Verta::instance($Orders->created_at)->format('Y/m/d')}} <br>
+                <b>تاریخ تحویل : </b> {{\Hekmatinasser\Verta\Verta::instance($Orders->OrderDate)->format('Y/m/d')}} <br>
                 <b>کد ملی : </b> {{$Orders->CodeMeli}}
             </div>
             <!-- /.col -->

@@ -10,7 +10,7 @@
                                 <i class="fa fa-check"></i>
                             </div>
                             <h1>سفارش با موفقیت در سیستم ثبت شد.</h1>
-                            <p>سفارش نهایتا تا یک روز آماده تحویل خواهد شد.</p>
+                            <p>سفارش نهایتا تا تاریخ  {{\Hekmatinasser\Verta\Verta::instance($Order->OrderDate)->format('d-m-Y')}} آماده تحویل خواهد شد.</p>
                         </div>
                         <div class="order-info default">
                             <h3>کد سفارش: <span>{{$Order->id}}</span></h3>
@@ -28,8 +28,10 @@
                                     <tbody>
                                     <tr>
                                         <td>مبلغ کل : {{$Order->Price}}</td>
+                                        <td>تاریخ تحویل : {{$Order->OrderDate}}</td>
                                     </tr>
                                     <tr>
+                                        <td>آدرس شما : {{\Illuminate\Support\Facades\Auth::user()->Address}}</td>
                                         <td>وضعیت سفارش: در انتظار تحویل</td>
                                     </tr>
                                     </tbody>

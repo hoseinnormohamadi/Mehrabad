@@ -69,6 +69,11 @@
                         {{\App\User::where('CodeMeli' , $CodeMeli)->first()->PhoneNumber}}
                         <br>
                     @endif
+                    @if(\App\User::where('CodeMeli' , $CodeMeli)->first()->Address != null)
+                        آدرس :
+                        {{\App\User::where('CodeMeli' , $CodeMeli)->first()->Address}}
+                        <br>
+                    @endif
                     @if(\App\User::where('CodeMeli' , $CodeMeli)->first()->email != null)
                         ایمیل :
                         {{\App\User::where('CodeMeli' , $CodeMeli)->first()->email}}
@@ -93,7 +98,8 @@
                     <thead>
                     <tr>
                         <th>محصول</th>
-                        <th>تاریخ</th>
+                        <th>تاریخ ثبت سفارش</th>
+                        <th>تاریخ تحویل</th>
                         <th>مبلغ</th>
                     </tr>
                     </thead>
@@ -102,6 +108,7 @@
                     <tr>
                         <td>{{$order['Name']}}</td>
                         <td>{{$order['Date']}}</td>
+                        <td>{{$order['OrderDate']}}</td>
                         <td>{{number_format($order['Price'], 0, ',', ',')}} تومان</td>
 
 

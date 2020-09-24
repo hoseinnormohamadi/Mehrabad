@@ -22,7 +22,19 @@
                                         {{$product->Name}}
                                     </h3>
                                 </td>
-                                <td>{{number_format($product->Price, 0, ',', ',')}} تومان   </td>
+                                <td>
+
+
+                                    @if($product->Takhfif != null)
+                                        <del><span> {{  number_format($product->Price, 0, ',', ',')}} تومان </span></del><br>
+                                        <span style="color: red"> {{  number_format($product->Takhfif, 0, ',', ',')}} تومان </span>
+                                    @else
+                                        <span style="color: red"> {{  number_format($product->Price, 0, ',', ',')}} تومان </span>
+
+                                    @endif
+
+
+                                </td>
                             </tr>
                             @endforeach
                             @else
@@ -43,7 +55,7 @@
                         <div class="checkout-summary">
                             <div class="checkout-summary-main">
                                 <ul class="checkout-summary-summary">
-                                    <li><span>مبلغ کل</span><span>{{number_format(\App\WishList::Price(), 0, ',', ',')}} تومان</span></li>
+                                    <li><span>مبلغ کل بدون تخفیف : </span><span>{{number_format(\App\WishList::AllPrice(), 0, ',', ',')}} تومان </span></li>
                                 </ul>
                                 <div class="checkout-summary-devider">
                                     <div></div>
@@ -53,14 +65,30 @@
                                     <div class="checkout-summary-price-value">
                                         <span class="checkout-summary-price-value-amount">{{number_format(\App\WishList::Price(), 0, ',', ',')}}</span>تومان
                                     </div>
-                                    <a href="{{route('Buy.Buy')}}" class="selenium-next-step-shipping">
-                                        <div class="parent-btn">
-                                            <button class="dk-btn dk-btn-info">
-                                                ادامه ثبت سفارش
-                                                <i class="now-ui-icons shopping_basket"></i>
-                                            </button>
-                                        </div>
-                                    </a>
+                                    @if(\App\WishList::where('UserID' , \Illuminate\Support\Facades\Auth::id())->count() <= 0)
+
+                                        <a href="{{route('Index')}}" class="selenium-next-step-shipping" >
+                                            <div class="parent-btn">
+                                                <button class="dk-btn dk-btn-danger" >
+                                                    ادامه خرید
+                                                    <i class="now-ui-icons shopping_basket"></i>
+                                                </button>
+                                            </div>
+                                        </a>
+
+                                    @else
+
+                                        <a href="{{route('Buy.Buy')}}" class="selenium-next-step-shipping" >
+                                            <div class="parent-btn">
+                                                <button class="dk-btn dk-btn-info" >
+                                                    ادامه ثبت سفارش
+                                                    <i class="now-ui-icons shopping_basket"></i>
+                                                </button>
+                                            </div>
+                                        </a>
+
+                                    @endif
+
                                     <div>
                                             <span>
                                                 کالاهای موجود در سبد شما ثبت و رزرو نشده‌اند، برای ثبت سفارش مراحل بعدی

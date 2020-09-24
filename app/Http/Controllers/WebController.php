@@ -33,6 +33,16 @@ class WebController extends Controller
         return view('Front.Search')->with(['Items' => $Items]);
     }
 
+    public function Brand($id){
+        $Item = Shop::where('Brand' , $id)->paginate(16);
+        return view('Front.Search')->with(['Items' => $Item]);
+
+    }
+
+    public function HowToBuy(){
+
+    }
+
     public function Category($CategoryID){
         $Category = ShopCategory::find($CategoryID);
         if ($Category == null || empty($Category)){

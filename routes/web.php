@@ -6,26 +6,34 @@ Route::get('/', 'WebController@index')->name('Index');
 Route::get('Product/{ID}', 'WebController@Product')->name('Product');
 Route::get('Amazing', 'WebController@Amazing')->name('Amazing');
 Route::get('Search', 'WebController@Search')->name('Search');
+Route::get('HowToBuy', 'WebController@HowToBuy')->name('HowToBuy');
 Route::get('Category/{ID}', 'WebController@Category')->name('Category');
+Route::get('Brands/{ID}', 'WebController@Brand')->name('Brands');
 Route::get('Category/{ID}/{SID}', 'WebController@SubCategory')->name('SubCat');
-Route::group(['middleware' => 'auth'] , function (){
+Route::group(['middleware' => ['auth']] , function (){
     Route::group(['prefix' => 'Panel' , 'as' => 'Panel.'] , function (){
-        Route::get('index','PanellController@Index')->name('Index');
-        Route::get('ChangePassword','PanellController@ChangePassword')->name('ChangePassword');
-        Route::get('Orders','PanellController@Orders')->name('Orders');
-        Route::get('Edit','PanellController@Edit')->name('Edit');
-        Route::put('Update','PanellController@Update')->name('Update');
-    });
+        Route::get('Password','PanellController@Password')->name('Password');
+        Route::post('ChangePassword','PanellController@ChangePassword')->name('ChangePassword');
+        });
+    Route::group(['middleware' => ['PasswordCheck']] , function (){
+        Route::group(['prefix' => 'Panel' , 'as' => 'Panel.'] , function (){
+            Route::get('index','PanellController@Index')->name('Index');
+            Route::get('Orders','PanellController@Orders')->name('Orders');
+            Route::get('Edit','PanellController@Edit')->name('Edit');
+            Route::put('Update','PanellController@Update')->name('Update');
+        });
 
 
-    Route::group(['prefix' => 'Buy', 'as' => 'Buy.'], function () {
-        Route::get('Buy', 'BuyController@Buy')->name('Buy');
-        Route::get('Complete', 'BuyController@Complete')->name('Complete');
-        Route::get('Completed/{ID}', 'BuyController@Completed')->name('Completed');
-        Route::get('WishList', 'BuyController@WishListShow')->name('WishListShow');
-        Route::get('WishList/{ProductID}', 'BuyController@WishList')->name('WishList');
-        Route::get('Remove/{ProductID}', 'BuyController@Remove')->name('Remove');
+        Route::group(['prefix' => 'Buy', 'as' => 'Buy.'], function () {
+            Route::get('Buy', 'BuyController@Buy')->name('Buy');
+            Route::get('Complete', 'BuyController@Complete')->name('Complete');
+            Route::get('Completed/{ID}', 'BuyController@Completed')->name('Completed');
+            Route::get('WishList', 'BuyController@WishListShow')->name('WishListShow');
+            Route::get('WishList/{ProductID}', 'BuyController@WishList')->name('WishList');
+            Route::get('Remove/{ProductID}', 'BuyController@Remove')->name('Remove');
+        });
     });
+
 });
 
 

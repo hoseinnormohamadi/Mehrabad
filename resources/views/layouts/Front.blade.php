@@ -123,12 +123,24 @@
                                 </div>
                             @endguest
                             @auth()
+
+                                    @if(\Illuminate\Support\Facades\Auth::user()->Rule == 'Admin')
+                                        <div class="dropdown-item">
+                                            <a href="{{route('Dashboard')}}" class="dropdown-item-link">
+                                                <i class="fa fa-gears"></i>
+                                                پنل مدیریت
+                                            </a>
+                                        </div>
+                                    @endif
+
                                 <div class="dropdown-item">
                                     <a href="{{route('Panel.Index')}}" class="dropdown-item-link">
                                         <i class="fa fa-user"></i>
                                         پروفایل
                                     </a>
                                 </div>
+
+
 
 
                                 <div class="dropdown-item">
@@ -161,10 +173,21 @@
                                     <span> {{number_format(\App\WishList::Price(), 0, ',', ',')}}</span>
                                     <span> تومان</span>
                                 </div>
-                                <a href="{{route('Buy.WishListShow')}}" class="basket-link">
-                                    <span>مشاهده سبد خرید</span>
-                                    <div class="basket-arrow"></div>
-                                </a>
+
+                                @guest
+                                    <a href="{{route('login')}}" class="basket-link">
+                                        <span> ورود و مشاهده سبد خرید</span>
+                                        <div class="basket-arrow"></div>
+                                    </a>
+
+                                @endguest
+                                @auth
+                                    <a href="{{route('Buy.WishListShow')}}" class="basket-link">
+                                        <span>مشاهده سبد خرید</span>
+                                        <div class="basket-arrow"></div>
+                                    </a>
+                                @endauth
+
                             </div>
                             <ul class="basket-list">
                                 @if(\App\WishList::Wishes() != null)
@@ -183,7 +206,7 @@
                                                 <div class="basket-item-params">
                                                     <div class="basket-item-props">
                                                         @if($product->Takhfif != null)
-                                                            <del><span> {{  number_format($product->Price, 0, ',', ',')}} تومان </span></del>
+                                                            <del><span> {{  number_format($product->Price, 0, ',', ',')}} تومان </span></del><br>
                                                             <span> {{  number_format($product->Takhfif, 0, ',', ',')}} تومان </span>
                                                         @else
                                                             <span> {{  number_format($product->Price, 0, ',', ',')}} تومان </span>
@@ -393,14 +416,6 @@
                             <div class="footer-social">
                                 <a href="{{\App\Site::find(1)->instagram}}" target="_blank"><i
                                         class="fa fa-instagram"></i>اینستاگرام ما</a>
-                            </div>
-                            <div class="footer-social">
-                                <a href="{{\App\Site::find(1)->Telegram}}" target="_blank"><i
-                                        class="fa fa-telegram"></i>تلگرام ما</a>
-                            </div>
-                            <div class="footer-social">
-                                <a href="{{\App\Site::find(1)->Facebook}}" target="_blank"><i
-                                        class="fa fa-facebook"></i>فیسبوک ما</a>
                             </div>
                         </div>
                     </div>

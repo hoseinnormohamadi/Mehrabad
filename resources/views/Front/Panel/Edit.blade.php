@@ -50,6 +50,12 @@
                                                 <input name="email" class="input-field" type="email" value="{{\Illuminate\Support\Facades\Auth::user()->email}}">
                                             </div>
                                         </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-account-title">آدرس منزل</div>
+                                            <div class="form-account-row">
+                                                <input name="Address" class="input-field" type="text" value="{{\Illuminate\Support\Facades\Auth::user()->Address}}">
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="col-12 text-center">
@@ -71,7 +77,7 @@
                         </div>
                         <div class="profile-box-username">{{\Illuminate\Support\Facades\Auth::user()->FirstName . ' ' .  \Illuminate\Support\Facades\Auth::user()->LastName}}</div>
                         <div class="profile-box-tabs">
-                            <a href="{{route('Panel.ChangePassword')}}" class="profile-box-tab profile-box-tab-access">
+                            <a href="{{route('Panel.Password')}}" class="profile-box-tab profile-box-tab-access">
                                 <i class="now-ui-icons ui-1_lock-circle-open"></i>
                                 تغییر رمز
                             </a>

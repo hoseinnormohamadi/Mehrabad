@@ -12,11 +12,24 @@ class WishList extends Model
     ];
 
 
+
+    public static function AllPrice(){
+        $Price = 0;
+        foreach (WishList::where('UserID' , Auth::id())->get() as $item) {
+            $Product = Shop::find($item->ProductID);
+                $Price += $Product->Price;
+        }
+        return $Price;
+    }
     public static function Price(){
         $Price = 0;
         foreach (WishList::where('UserID' , Auth::id())->get() as $item) {
             $Product = Shop::find($item->ProductID);
-            $Price += $Product->Price;
+            if ($Product->Takhfif != null){
+                $Price += $Product->Takhfif;
+            }else{
+                $Price += $Product->Price;
+            }
         }
         return $Price;
     }

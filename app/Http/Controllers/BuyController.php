@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\Shop;
 use App\WishList;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,20 +37,32 @@ class BuyController extends Controller
 
     public function Buy()
     {
+
         return view('Front.OrderStep1');
     }
 
 
-    public function Complete()
+    public function Complete(Request $request)
     {
-
+        if ($request->OrderDate == null){
+            $OrderDate = Carbon::tomorrow()->format('Y-m-d');
+        }else{
+            $OrderDate = $request->OrderDate;
+        }
+        if (WishList::where('UserID', Auth::id())->count() <= 0){
+            return RedirectController::Redirect(url()->previous(), 'ابتدا مواردی را به سبد خرید خود اضافه کنید');
+        }
         $Products = [];
         $Price = 0;
         foreach (WishList::where('UserID', Auth::id())->get() as $item) {
             $Product = Shop::find($item->ProductID);
             $Product->Count = $Product->Count - 1;
             $Product->save();
-            $Price += $Product->Price;
+            if ($Product->Takhfif != null){
+                $Price += $Product->Takhfif;
+            }else{
+                $Price += $Product->Price;
+            }
             $Products[] = $Product->id;
             $item->delete();
         }
@@ -57,7 +70,8 @@ class BuyController extends Controller
             'UserID' => Auth::id(),
             'ProductsID' => json_encode($Products),
             'Price' => $Price,
-            'CodeMeli' => Auth::user()->CodeMeli
+            'CodeMeli' => Auth::user()->CodeMeli,
+            'OrderDate' => $OrderDate,
         ]);
 
 

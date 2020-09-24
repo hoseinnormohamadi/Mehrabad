@@ -64,7 +64,6 @@ class OrderController extends Controller
         $CodeMeli = json_decode($request->Data)->CodeMeli;
         if (json_decode($request->Data)->CodeMeli != null) {
             $Orders = Order::whereBetween('created_at', [$StartDate, $FinishDate])->where('CodeMeli', $CodeMeli)->get();
-
         } else {
             $Orders = Order::whereBetween('created_at', [$StartDate, $FinishDate])->get();
         }
@@ -76,7 +75,8 @@ class OrderController extends Controller
                     'id' => $Data->id,
                     'Name' => $Data->Name,
                     'Price' => $Data->Price,
-                    'Date' => Verta::instance($order->created_at)->format('Y/m/d')
+                    'Date' => Verta::instance($order->created_at)->format('Y/m/d'),
+                    'OrderDate' => Verta::instance($order->OrderDate)->format('Y/m/d'),
 
                 );
                 $Price += $Data->Price;
