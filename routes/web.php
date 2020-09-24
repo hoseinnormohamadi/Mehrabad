@@ -6,7 +6,7 @@ Route::get('/', 'WebController@index')->name('Index');
 Route::get('Product/{ID}', 'WebController@Product')->name('Product');
 Route::get('Amazing', 'WebController@Amazing')->name('Amazing');
 Route::get('Search', 'WebController@Search')->name('Search');
-Route::get('HowToBuy', 'WebController@HowToBuy')->name('HowToBuy');
+Route::get('Details/{NAME}', 'WebController@Details')->name('Details');
 Route::get('Category/{ID}', 'WebController@Category')->name('Category');
 Route::get('Brands/{ID}', 'WebController@Brand')->name('Brands');
 Route::get('Category/{ID}/{SID}', 'WebController@SubCategory')->name('SubCat');
@@ -62,6 +62,23 @@ Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
             Route::put('Update/{ID}', 'ShopCategoryController@Update')->name('Update');
             Route::get('Delete/{ID}', 'ShopCategoryController@Delete')->name('Delete');
         });
+
+
+
+
+
+
+
+
+
+
+
+        Route::group(['prefix' => 'Pages', 'as' => 'Pages.'], function () {
+            Route::get('/{NAME}', 'DetailsController@Details')->name('Details');
+            Route::post('DetailsPost/{NAME}', 'DetailsController@DetailsPost')->name('DetailsPost');
+
+        });
+
 
         Route::group(['prefix' => 'SubCategory', 'as' => 'SubCategory.'], function () {
             Route::get('/', 'SubCategoryController@All')->name('Category');
@@ -151,13 +168,6 @@ Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
         });
     });
 });
-
-
-Route::get('test', 'GalleryController@index');
-
-Route::post('test', 'GalleryController@Upload')->name('Upload');
-Route::post('test2', 'GalleryController@index')->name('Test');
-Route::post('test3', 'GalleryController@Test')->name('MyProfile');
 
 
 Auth::routes(['register' => false]);

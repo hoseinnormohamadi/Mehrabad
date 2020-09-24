@@ -357,13 +357,13 @@
                             </header>
                             <ul class="footer-menu">
                                 <li>
-                                    <a href="#">نحوه ثبت سفارش</a>
+                                    <a href="{{route('Details' , 'HowToBuy')}}">نحوه ثبت سفارش</a>
                                 </li>
                                 <li>
-                                    <a href="#">رویه ارسال سفارش</a>
+                                    <a href="{{route('Details' , 'SendProduct')}}">رویه ارسال سفارش</a>
                                 </li>
                                 <li>
-                                    <a href="#">شیوه‌های پرداخت</a>
+                                    <a href="{{route('Details' , 'PaymentMethod')}}">شیوه‌های پرداخت</a>
                                 </li>
                             </ul>
                         </div>
@@ -375,16 +375,13 @@
                             </header>
                             <ul class="footer-menu">
                                 <li>
-                                    <a href="#">پاسخ به پرسش‌های متداول</a>
+                                    <a href="{{route('Details' , 'Questions')}}">پاسخ به پرسش‌های متداول</a>
                                 </li>
                                 <li>
-                                    <a href="#">رویه‌های بازگرداندن کالا</a>
+                                    <a href="{{route('Details' , 'UseSite')}}">شرایط استفاده</a>
                                 </li>
                                 <li>
-                                    <a href="#">شرایط استفاده</a>
-                                </li>
-                                <li>
-                                    <a href="#">حریم خصوصی</a>
+                                    <a href="{{route('Details' , 'Privacy')}}">حریم خصوصی</a>
                                 </li>
                             </ul>
                         </div>
@@ -392,20 +389,20 @@
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="widget-menu widget card">
                             <header class="card-header">
-                                <h3 class="card-title">با </h3>
+                                <h3 class="card-title">ارتباطات </h3>
                             </header>
                             <ul class="footer-menu">
                                 <li>
-                                    <a href="#">همکاری با سازمان‌ها</a>
+                                    <a href="{{route('Details' , 'WorkWithCompany')}}">همکاری با سازمان‌ها</a>
                                 </li>
                                 <li>
-                                    <a href="#">فرصت‌های شغلی</a>
+                                    <a href="{{route('Details' , 'Jobs')}}">فرصت‌های شغلی</a>
                                 </li>
                                 <li>
-                                    <a href="#">تماس با ما</a>
+                                    <a href="{{route('Details' , 'CallUs')}}">تماس با ما</a>
                                 </li>
                                 <li>
-                                    <a href="#">درباره ما</a>
+                                    <a href="{{route('Details' , 'AboutUs')}}">درباره ما</a>
                                 </li>
                             </ul>
                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Details;
 use App\Shop;
 use App\ShopCategory;
 use App\SubCategory;
@@ -39,8 +40,9 @@ class WebController extends Controller
 
     }
 
-    public function HowToBuy(){
-
+    public function Details($Name){
+        $Detail = Details::find(1);
+        return view('Front.Details')->with(['Details' => $Detail->$Name]);
     }
 
     public function Category($CategoryID){

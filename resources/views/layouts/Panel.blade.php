@@ -190,6 +190,32 @@
                         <li><a href="{{route('Brand.Add')}}"><i class="fa fa-circle-o"></i> افزودن</a></li>
                     </ul>
                 </li>
+
+
+
+                <li class="treeview @if(request()->segment(2) == 'Pages' ) active @endif">
+                    <a href="#">
+                        <i class="fa fa-pagelines"></i>
+                        <span>صفحات</span>
+                        <span class="pull-left-container">
+                <i class="fa fa-angle-right pull-left"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('Pages.Details' , 'HowToBuy')}}"><i class="fa fa-circle-o"></i> نحوه ثبت سفارش</a></li>
+                        <li><a href="{{route('Pages.Details' , 'SendProduct')}}"><i class="fa fa-circle-o"></i>رویه ارسال سفارش</a></li>
+                        <li><a href="{{route('Pages.Details' , 'PaymentMethod')}}"><i class="fa fa-circle-o"></i>شیوه‌های پرداخت</a></li>
+                        <li><a href="{{route('Pages.Details' , 'Questions')}}"><i class="fa fa-circle-o"></i>پاسخ به پرسش‌های متداول</a></li>
+                        <li><a href="{{route('Pages.Details' , 'UseSite')}}"><i class="fa fa-circle-o"></i>شرایط استفاده</a></li>
+                        <li><a href="{{route('Pages.Details' , 'Privacy')}}"><i class="fa fa-circle-o"></i>حریم خصوصی</a></li>
+                        <li><a href="{{route('Pages.Details' , 'WorkWithCompany')}}"><i class="fa fa-circle-o"></i>همکاری با سازمان‌ها</a></li>
+                        <li><a href="{{route('Pages.Details' , 'Jobs')}}"><i class="fa fa-circle-o"></i>فرصت‌های شغلی</a></li>
+                        <li><a href="{{route('Pages.Details' , 'CallUs')}}"><i class="fa fa-circle-o"></i>تماس با ما</a></li>
+                        <li><a href="{{route('Pages.Details' , 'AboutUs')}}"><i class="fa fa-circle-o"></i>درباره ما</a></li>
+                    </ul>
+                </li>
+
+
                 <li class="treeview @if(request()->segment(2) == 'Slider' ) active @endif">
                     <a href="#">
                         <i class="fa fa-sliders"></i>
