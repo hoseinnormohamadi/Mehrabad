@@ -1,4 +1,7 @@
 @extends('layouts.Shoping')
+@section('Head')
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/Plugin/PersianDate/PersianDate.css')}}"/>
+@endsection
 @section('content')
     <main class="cart-page default">
         <div class="container">
@@ -78,11 +81,11 @@
                                     </div>
                                     <form method="get" action="{{route('Buy.Complete')}}">
                                         <div class="parent-btn">
-                                            <label>زمان تحویل کالا :‌</label>
-                                            <input class="form-control" type="date" name="OrderDate">
+                                            <label>زمان تحویل کالا : </label>
+                                            <input class="form-control" autocomplete="off" type="text" name="OrderDate" id="OrderDate">
                                         </div>
                                         <div class="parent-btn">
-                                            <button type="submit" class="dk-btn @if(\App\WishList::where('UserID' , \Illuminate\Support\Facades\Auth::id())->count() <= 0) dk-btn-danger @else dk-btn-info @endif" @if(\App\WishList::where('UserID' , \Illuminate\Support\Facades\Auth::id())->count() <= 0) disabled @endif>
+                                            <button type="submit" onautocomplete="off" class="dk-btn @if(\App\WishList::where('UserID' , \Illuminate\Support\Facades\Auth::id())->count() <= 0) dk-btn-danger @else dk-btn-info @endif" @if(\App\WishList::where('UserID' , \Illuminate\Support\Facades\Auth::id())->count() <= 0) disabled @endif>
                                                 خرید
                                                 <i class="now-ui-icons shopping_basket"></i>
                                             </button>
@@ -111,8 +114,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="checkout-feature-aside">
                             <ul>
@@ -137,4 +138,26 @@
         </div>
     </main>
 
+@endsection
+
+
+@section('js')
+    <script type="text/javascript" src="{{asset('assets/Plugin/PersianDate/PersianDate.min.js')}}"></script>
+<script>
+ /*   var currentDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    var day = currentDate.getDate()
+    var month = currentDate.getMonth() + 1
+    var year = currentDate.getFullYear()
+    alert(year + '/' + month + '/' + day)
+*/
+
+
+    var p = new persianDate();
+        $("#OrderDate").persianDatepicker({
+
+                startDate: p.now().addDay(1).toString(),
+            endDate: p.now().addDay(40).toString()
+        });
+
+</script>
 @endsection

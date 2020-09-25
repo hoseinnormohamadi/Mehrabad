@@ -102,14 +102,16 @@
                     <thead>
                     <tr>
                         <th>محصول</th>
+                        <th>تعداد</th>
                         <th>مبلغ</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach(json_decode($Orders->ProductsID) as $order)
                     <tr>
-                        <td>{{\App\Shop::find($order)->Name}}</td>
-                        <td>{{number_format(\App\Shop::find($order)->Price, 0, ',', ',')}} تومان</td>
+                        <td>{{\App\Shop::find($order->Product)->Name}}</td>
+                        <td>{{$order->Count}}</td>
+                        <td>{{number_format(\App\Shop::find($order->Product)->Price, 0, ',', ',')}} تومان</td>
 
 
                     </tr>

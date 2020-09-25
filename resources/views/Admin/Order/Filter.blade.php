@@ -1,4 +1,7 @@
 @extends('layouts.Panel')
+@section('Head')
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/Plugin/PersianDate/PersianDate.css')}}"/>
+@endsection
 @section('content')
     <section class="content">
 
@@ -22,13 +25,13 @@
 
                                     <div class="col col-lg12">
                                     <label>تاریخ شروع</label>
-                                    <input type="date" class="form-control input-sm" placeholder="" aria-controls="example1" name="StartDate">
+                                    <input type="text" class="form-control input-sm" placeholder="" aria-controls="example1" id="StartDate" name="StartDate">
                                     </div>
 
 
                                     <div class="col col-lg12">
                                     <label>تاریخ پایان</label>
-                                    <input type="date" class="form-control input-sm" placeholder="" aria-controls="example1" name="FinishDate">
+                                    <input type="text" class="form-control input-sm" placeholder="" aria-controls="example1" id="EndDate" name="FinishDate">
                                     </div>
 
                                     <div class="col col-lg12">
@@ -47,4 +50,13 @@
 
     </div>
     </section>
+@endsection
+
+@section('js')
+    <script type="text/javascript" src="{{asset('assets/Plugin/PersianDate/PersianDate.min.js')}}"></script>
+    <script>
+        var p = new persianDate();
+        $("#StartDate , #EndDate").persianDatepicker();
+
+    </script>
 @endsection

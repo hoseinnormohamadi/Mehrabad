@@ -9,7 +9,7 @@
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="product-gallery default">
                                     <img class="zoom-img" id="img-product-zoom" src="{{json_decode($Product->Images)[0]}}"
-                                         data-zoom-image="{{json_decode($Product->Images)[0]}}" width="411" />
+                                         data-zoom-image="{{json_decode($Product->Images)[0]}}" width="311" />
 
                                     <div id="gallery_01f" style="width:500px;float:left;">
                                         <ul class="gallery-items owl-carousel owl-theme" id="gallery-slider">

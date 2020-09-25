@@ -106,7 +106,7 @@
                     <tbody>
                     @foreach($Products as $order)
                     <tr>
-                        <td>{{$order['Name']}}</td>
+                        <td>{{$order['Name']}} ({{$order['Count']}})</td>
                         <td>{{$order['Date']}}</td>
                         <td>{{$order['OrderDate']}}</td>
                         <td>{{number_format($order['Price'], 0, ',', ',')}} تومان</td>

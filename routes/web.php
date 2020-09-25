@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'WebController@index')->name('Index');
+Route::get('/home', 'WebController@index')->name('home');
 Route::get('Product/{ID}', 'WebController@Product')->name('Product');
 Route::get('Amazing', 'WebController@Amazing')->name('Amazing');
 Route::get('Search', 'WebController@Search')->name('Search');
@@ -10,17 +11,17 @@ Route::get('Details/{NAME}', 'WebController@Details')->name('Details');
 Route::get('Category/{ID}', 'WebController@Category')->name('Category');
 Route::get('Brands/{ID}', 'WebController@Brand')->name('Brands');
 Route::get('Category/{ID}/{SID}', 'WebController@SubCategory')->name('SubCat');
-Route::group(['middleware' => ['auth']] , function (){
-    Route::group(['prefix' => 'Panel' , 'as' => 'Panel.'] , function (){
-        Route::get('Password','PanellController@Password')->name('Password');
-        Route::post('ChangePassword','PanellController@ChangePassword')->name('ChangePassword');
-        });
-    Route::group(['middleware' => ['PasswordCheck']] , function (){
-        Route::group(['prefix' => 'Panel' , 'as' => 'Panel.'] , function (){
-            Route::get('index','PanellController@Index')->name('Index');
-            Route::get('Orders','PanellController@Orders')->name('Orders');
-            Route::get('Edit','PanellController@Edit')->name('Edit');
-            Route::put('Update','PanellController@Update')->name('Update');
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['prefix' => 'Panel', 'as' => 'Panel.'], function () {
+        Route::get('Password', 'PanellController@Password')->name('Password');
+        Route::post('ChangePassword', 'PanellController@ChangePassword')->name('ChangePassword');
+    });
+    Route::group(['middleware' => ['PasswordCheck']], function () {
+        Route::group(['prefix' => 'Panel', 'as' => 'Panel.'], function () {
+            Route::get('index', 'PanellController@Index')->name('Index');
+            Route::get('Orders', 'PanellController@Orders')->name('Orders');
+            Route::get('Edit', 'PanellController@Edit')->name('Edit');
+            Route::put('Update', 'PanellController@Update')->name('Update');
         });
 
 
@@ -37,10 +38,8 @@ Route::group(['middleware' => ['auth']] , function (){
 });
 
 
-Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
-    Route::group(['middleware' => 'Admin'] , function (){
+Route::group(['prefix' => 'Dashboard', 'middleware' => ['Admin','auth']], function () {
         Route::get('/', 'WebController@Admin')->name('Dashboard');
-
 
         Route::group(['prefix' => 'Shop', 'as' => 'Shop.'], function () {
             Route::get('/', 'ShopController@All')->name('All');
@@ -64,15 +63,6 @@ Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
         });
 
 
-
-
-
-
-
-
-
-
-
         Route::group(['prefix' => 'Pages', 'as' => 'Pages.'], function () {
             Route::get('/{NAME}', 'DetailsController@Details')->name('Details');
             Route::post('DetailsPost/{NAME}', 'DetailsController@DetailsPost')->name('DetailsPost');
@@ -91,7 +81,6 @@ Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
         });
 
 
-
         Route::group(['prefix' => 'Slider', 'as' => 'Slider.'], function () {
             Route::get('/', 'SliderController@All')->name('Slider');
             Route::get('All', 'SliderController@All')->name('All');
@@ -101,7 +90,6 @@ Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
             Route::put('Update/{ID}', 'SliderController@Update')->name('Update');
             Route::get('Delete/{ID}', 'SliderController@Delete')->name('Delete');
         });
-
 
 
         Route::group(['prefix' => 'Ad', 'as' => 'Ad.'], function () {
@@ -115,8 +103,6 @@ Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
         });
 
 
-
-
         Route::group(['prefix' => 'Brand', 'as' => 'Brand.'], function () {
             Route::get('/', 'BrandsController@All')->name('Brand');
             Route::get('All', 'BrandsController@All')->name('All');
@@ -126,7 +112,6 @@ Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
             Route::put('Update/{ID}', 'BrandsController@Update')->name('Update');
             Route::get('Delete/{ID}', 'BrandsController@Delete')->name('Delete');
         });
-
 
 
         Route::group(['prefix' => 'Order', 'as' => 'Order.'], function () {
@@ -166,7 +151,7 @@ Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
             Route::post('General', 'MyProfile@General')->name('General');
             Route::post('Security', 'MyProfile@Security')->name('Security');
         });
-    });
+
 });
 
 

@@ -8,6 +8,7 @@
                 <h3 class="box-title">ویرایش زیر دسته بندی</h3>
             </div>
             <form method="post" action="{{route('SubCategory.Update' , $Tag->id)}}" enctype="multipart/form-data">
+                @method('PUT')
                 @csrf
                 <div class="box-body">
 
@@ -34,7 +35,7 @@
                 </div>
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">ایجاد دسته بندی</button>
+                    <button type="submit" class="btn btn-primary">بروزرسانی زیر دسته بندی</button>
                 </div>
             </form>
         </div>

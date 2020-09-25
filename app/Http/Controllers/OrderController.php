@@ -55,12 +55,13 @@ class OrderController extends Controller
 
     public function Report(Request $request)
     {
-
         $products = [];
         $shop = [];
         $Price = 0;
-        $StartDate = json_decode($request->Data)->StartDate;
-        $FinishDate = json_decode($request->Data)->FinishDate;
+        $StartDate = explode('/',json_decode($request->Data)->StartDate);
+        $StartDate = implode('-',Verta::getGregorian($StartDate[0],$StartDate[1],$StartDate[2]));
+        $FinishDate = explode('/',json_decode($request->Data)->FinishDate);
+        $FinishDate = implode('-',Verta::getGregorian($FinishDate[0],$FinishDate[1],$FinishDate[2]));
         $CodeMeli = json_decode($request->Data)->CodeMeli;
         if (json_decode($request->Data)->CodeMeli != null) {
             $Orders = Order::whereBetween('created_at', [$StartDate, $FinishDate])->where('CodeMeli', $CodeMeli)->get();
@@ -70,16 +71,23 @@ class OrderController extends Controller
 
         foreach ($Orders as $order) {
             foreach (json_decode($order->ProductsID) as $item) {
-                $Data = Shop::find($item);
+                $Data = Shop::find($item->Product);
                 $shop[] = array(
                     'id' => $Data->id,
                     'Name' => $Data->Name,
                     'Price' => $Data->Price,
+                    'Count' => $item->Count,
                     'Date' => Verta::instance($order->created_at)->format('Y/m/d'),
                     'OrderDate' => Verta::instance($order->OrderDate)->format('Y/m/d'),
 
                 );
-                $Price += $Data->Price;
+                for ($i = 0 ; $i < $item->Count ; $i++){
+                    if($Data->Takhfif != null){
+                        $Price += $Data->Takhfif;
+                    }else {
+                        $Price += $Data->Price;
+                    }
+                }
 
 
             }
@@ -97,13 +105,21 @@ class OrderController extends Controller
 
     public function FilterPost(Request $request)
     {
-        if ($request->CodeMeli != null) {
-            $Orders = Order::whereBetween('created_at', [$request->StartDate, $request->FinishDate])->where('CodeMeli', $request->CodeMeli)->paginate(25);
+        $StartDate = explode('/',$request->StartDate);
+        $StartDate = implode('-',Verta::getGregorian($StartDate[0],$StartDate[1],$StartDate[2]));
 
+
+        $FinishDate = explode('/',$request->FinishDate);
+        $FinishDate = implode('-',Verta::getGregorian($FinishDate[0],$FinishDate[1],$FinishDate[2]));
+
+
+
+        if ($request->CodeMeli != null) {
+            $Orders = Order::whereBetween('created_at', [$StartDate, $FinishDate])->where('CodeMeli', $request->CodeMeli)->paginate(25);
         } else {
-            $Orders = Order::whereBetween('created_at', [$request->StartDate, $request->FinishDate])->paginate(25);
+            $Orders = Order::whereBetween('created_at', [$StartDate, $FinishDate])->paginate(25);
         }
-        $Dates = [$request->StartDate, $request->FinishDate];
+        $Dates = [$StartDate, $FinishDate];
         return view('Admin.Order.Report')->with(['Orders' => $Orders, 'Dates' => $Dates]);
     }
 

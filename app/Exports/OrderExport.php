@@ -25,7 +25,7 @@ class OrderExport implements FromArray, WithHeadings
     {
         $Order = Order::where('id' , $this->id)->first();
         foreach (json_decode($Order->ProductsID) as $product) {
-            $Product[] = Shop::find($product)->Name;
+            $Product[] = Shop::find($product->Product)->Name;
         }
         $Product = implode( "    /    ",$Product );
         $FinalOrder = array([

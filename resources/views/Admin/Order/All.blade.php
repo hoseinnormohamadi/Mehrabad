@@ -61,8 +61,8 @@
                                     <td>{{\Hekmatinasser\Verta\Verta::instance($Order->created_at)->format('Y/m/d')}}</td>
                                     <td>
                                         @foreach(json_decode($Order->ProductsID) as $Product)
-                                            {{\App\Shop::find($Product)->Name}}
-                                        <img src="{{json_decode(\App\Shop::find($Product)->Images)[0]}}" width="50px">
+                                            {{\App\Shop::find($Product->Product)->Name}}
+                                        <img src="{{json_decode(\App\Shop::find($Product->Product)->Images)[0]}}" width="50px">
                                             <br>
                                         @endforeach
                                     </td>

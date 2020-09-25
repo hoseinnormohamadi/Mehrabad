@@ -17,6 +17,7 @@
     <link href="{{asset('assets/css/plugins/owl.carousel.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/css/plugins/owl.theme.default.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/css/main.css')}}" rel="stylesheet"/>
+    @yield('Head')
 </head>
 
 <body class="index-page sidebar-collapse">
@@ -37,8 +38,10 @@
                 <span class="navbar-toggler-bar bar3"></span>
             </button>
             <div class="search-nav default">
-                <form action="">
-                    <input type="text" placeholder="جستجو ...">
+
+                <form action="{{route('Search')}}" class="search">
+                    <input type="text" name="SearchTerm"
+                           placeholder="نام کالا مورد نظر خود را جستجو کنید…" value="@if(isset($_GET['SearchTerm'])){{$_GET['SearchTerm']}}@endif">
                     <button type="submit"><img src="{{asset('assets/img/search.png')}}" alt=""></button>
                 </form>
                 <ul>
@@ -97,6 +100,9 @@
                 </div>
                 <div class="col-lg-6 col-md-5 col-sm-8 col-7">
                     <div class="search-area default">
+
+
+
                         <form action="{{route('Search')}}" class="search">
                             <input type="text" name="SearchTerm"
                                    placeholder="نام کالا مورد نظر خود را جستجو کنید…" value="@if(isset($_GET['SearchTerm'])){{$_GET['SearchTerm']}}@endif">

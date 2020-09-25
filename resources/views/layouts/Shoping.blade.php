@@ -17,6 +17,7 @@
     <link href="{{asset('assets/css/plugins/owl.carousel.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/plugins/owl.theme.default.min.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/main.css')}}" rel="stylesheet" />
+    @yield('Head')
 </head>
 
 <body>
@@ -240,4 +241,7 @@
 <!-- Main Js -->
 <script src="{{asset('assets/js/main.js')}}" type="text/javascript"></script>
 
+
+@yield('js')
 </html>
+
