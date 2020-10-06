@@ -27,9 +27,9 @@
     <div class="container">
         <div class="navbar-translate">
             <a class="navbar-brand" href="{{route('Index')}}">
-                <img src="{{asset(\App\Site::Icon())}}" height="50px" alt="">
+                <img src="{{asset(\App\Site::Icon())}}" height="30px" alt="">
             </a>
-            <h3>{{\App\Site::Name()}}</h3>
+            <h3 style="margin-bottom: 0px !important; line-height : 0px !important;">{{\App\Site::Name()}}</h3>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navigation" aria-controls="navigation-index" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -38,16 +38,12 @@
                 <span class="navbar-toggler-bar bar3"></span>
             </button>
             <div class="search-nav default">
-
-                <form action="{{route('Search')}}" class="search">
-                    <input type="text" name="SearchTerm"
-                           placeholder="نام کالا مورد نظر خود را جستجو کنید…" value="@if(isset($_GET['SearchTerm'])){{$_GET['SearchTerm']}}@endif">
-                    <button type="submit"><img src="{{asset('assets/img/search.png')}}" alt=""></button>
-                </form>
                 <ul>
+
                     <li><a href="{{route('Panel.Index')}}"><i class="now-ui-icons users_single-02"></i></a></li>
                     <li><a href="{{route('Buy.WishListShow')}}"><i class="now-ui-icons shopping_basket"></i></a></li>
                 </ul>
+
             </div>
         </div>
 

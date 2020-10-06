@@ -76,6 +76,7 @@ class OrderController extends Controller
                     'id' => $Data->id,
                     'Name' => $Data->Name,
                     'Price' => $Data->Price,
+                    'Takhfif' => $Data->Takhfif,
                     'Count' => $item->Count,
                     'Date' => Verta::instance($order->created_at)->format('Y/m/d'),
                     'OrderDate' => Verta::instance($order->OrderDate)->format('Y/m/d'),

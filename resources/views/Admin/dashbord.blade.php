@@ -230,8 +230,9 @@
                                         </td>
                                         <td>
                                             @foreach(json_decode($order->ProductsID) as $product)
+
                                                 <a target="_blank"
-                                                   href="{{route('Product' , \App\Shop::find($product)->id)}}">{{\App\Shop::find($product)->Name }}</a>
+                                                   href="{{route('Product' , \App\Shop::find($product->Product)->id)}}">{{\App\Shop::find($product->Product)->Name }}</a>
                                                 <br>
                                             @endforeach
                                         </td>

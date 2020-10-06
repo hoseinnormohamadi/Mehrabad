@@ -42,7 +42,8 @@
                 <h2 class="page-header">
                     <img src="{{asset(\App\Site::Icon())}}" width="24px">
                     {{\App\Site::Name()}}
-                    <small class="pull-left">{{\Hekmatinasser\Verta\Verta::instance($Orders->created_at)->format('Y/m/d')}}</small>
+                    <small
+                        class="pull-left">{{\Hekmatinasser\Verta\Verta::instance($Orders->created_at)->format('Y/m/d')}}</small>
                 </h2>
             </div>
             <!-- /.col -->
@@ -71,7 +72,8 @@
                 <b>سفارش #{{$Orders->id}}</b><br>
                 <br>
                 <b>کد سفارش : </b> {{$Orders->id}}<br>
-                <b>تاریخ سفارش : </b> {{\Hekmatinasser\Verta\Verta::instance($Orders->created_at)->format('Y/m/d')}} <br>
+                <b>تاریخ سفارش : </b> {{\Hekmatinasser\Verta\Verta::instance($Orders->created_at)->format('Y/m/d')}}
+                <br>
                 <b>کد ملی : </b> {{$Orders->CodeMeli}}
             </div>
             <!-- /.col -->
@@ -87,6 +89,22 @@
                         <tr>
                             <th style="width:50%">مبلغ کل:</th>
                             <td>{{number_format($Orders->Price, 0, ',', ',')}} تومان</td>
+                        </tr>
+                        <tr>
+                            <th style="width:50%">مبلغ کل با تخفیف:</th>
+                            @php
+                                $Takhfif = 0;
+                                    foreach (json_decode($Orders->ProductsID) as $product ) {
+                                        $Product = \App\Shop::find($product->Product);
+                                        if ($Product->Takhfif != null) {
+                                             $Takhfif += $Product->Takhfif;
+                                         } else {
+                                             $Takhfif += $Product->Price;
+                                         }
+                                    }
+                            @endphp
+
+                            <td>{{number_format($Takhfif, 0, ',', ',')}} تومان</td>
                         </tr>
                     </table>
                 </div>

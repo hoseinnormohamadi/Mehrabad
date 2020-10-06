@@ -42,7 +42,7 @@ class OrderExport implements FromArray, WithHeadings
     {
         return [
             'نام کاربر',
-            'مبلغ فاکتور',
+            'مبلغ فاکتور با تخفیف',
             'محصولات',
             'کد ملی',
             'تاریخ خرید',

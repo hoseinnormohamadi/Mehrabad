@@ -104,6 +104,7 @@
                         <th>محصول</th>
                         <th>تعداد</th>
                         <th>مبلغ</th>
+                        <th>مبلغ با تخفیف</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -112,6 +113,7 @@
                         <td>{{\App\Shop::find($order->Product)->Name}}</td>
                         <td>{{$order->Count}}</td>
                         <td>{{number_format(\App\Shop::find($order->Product)->Price, 0, ',', ',')}} تومان</td>
+                        <td>{{number_format(\App\Shop::find($order->Product)->Takhfif, 0, ',', ',')}} تومان</td>
 
 
                     </tr>
